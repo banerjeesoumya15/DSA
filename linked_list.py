@@ -1,5 +1,5 @@
 '''
-Traversal of linked list
+LINKED LIST
 '''
 
 # Node class
@@ -15,13 +15,23 @@ class LinkedList:
     def __init__(self):
         self.head = None  # points to head element
 
-    # display or print contents of list
     def printList(self):
+        '''
+        Traversal of linked list
+        '''
         temp = self.head
         while(temp):
             print(temp.info, end=' ')
             temp = temp.next
         print()
+
+    def insertBeg(self, info):
+        '''
+        Insertion of Node at Beginning
+        '''
+        new_node = Node(info)
+        new_node.next = self.head
+        self.head = new_node
 
 def main():
 
@@ -39,5 +49,12 @@ def main():
     # print the list
     L1.printList()
 
-if __name__=='__main__':
+    # insert at beginning
+    L1.insertBeg(100)
+
+    # print the list after insertion
+    print("\nAfter insertion")
+    L1.printList()
+
+if __name__ == '__main__':
     main()
