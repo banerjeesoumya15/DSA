@@ -21,17 +21,56 @@ class LinkedList:
         '''
         temp = self.head
         while(temp):
-            print(temp.info, end=' ')
+            print(temp.info, end=' -> ')
             temp = temp.next
-        print()
+        print("NULL")
 
-    def insertBeg(self, info):
+    def insertBeg(self, new_info):
         '''
         Insertion of Node at Beginning
         '''
-        new_node = Node(info)
+        new_node = Node(new_info)
         new_node.next = self.head
         self.head = new_node
+
+    def insertAfter_node(self, prev_node, new_info):
+        '''
+        Insert node after given prev_node, with new_info
+        '''
+        if prev_node is None:
+            self.insertBeg(new_info)
+            return
+        temp = Node(new_info)
+        temp.next = prev_node.next
+        prev_node.next = temp
+
+    def insertAfter_info(self, prev_info, new_info):
+        '''
+        Insert node after given value in a node, with new_info
+        '''
+        # Linked list traversal
+        temp = self.head
+        while(temp):
+            if temp.info == prev_info:
+                self.insertAfter_node(temp, new_info)
+                break
+            temp = temp.next
+
+    def insertEnd(self, new_info):
+        '''
+        Insert node at the end of linked list
+        '''
+        new_node = Node(new_info)
+        if self.head is None:
+            self.head = new_node
+            return
+
+        # Linked list traversal
+        temp = self.head
+        while(temp.next is not None):
+            temp = temp.next
+
+        temp.next = new_node
 
 def main():
 
@@ -53,7 +92,28 @@ def main():
     L1.insertBeg(100)
 
     # print the list after insertion
-    print("\nAfter insertion")
+    print("\nAfter insertion at beginning")
+    L1.printList()
+
+    # insert after a given node
+    L1.insertAfter_node(second_node, 55)
+
+    # print the list after insertion
+    print("\nAfter insertion after 'second_node'")
+    L1.printList()
+
+    # insert after a given value
+    L1.insertAfter_info(55, 111)
+
+    # print the list after insertion
+    print("\nAfter insertion after info 55")
+    L1.printList()
+
+    # insert at end
+    L1.insertEnd(365)
+
+    # print the list after insertion
+    print("\nAfter insertion at end")
     L1.printList()
 
 if __name__ == '__main__':
