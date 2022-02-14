@@ -71,6 +71,33 @@ class LinkedList:
             temp = temp.next
 
         temp.next = new_node
+        
+    def deleteInfo(self, info):
+        '''
+        Delete first occurence of given info
+        '''
+        temp = self.head
+        
+        if temp is None:
+            return
+
+        # if head node is deleted
+        if temp.info == info:
+            self.head = temp.next
+            temp = None
+            return
+
+        # search for info
+        # previous node info is stored
+        while(temp is not None):
+            if temp.info == info:
+                break
+            prev = temp
+            temp = temp.next
+
+        # delete the link
+        prev.next = temp.next
+        temp = None
 
 def main():
 
@@ -115,6 +142,12 @@ def main():
     # print the list after insertion
     print("\nAfter insertion at end")
     L1.printList()
+    
+    # Delete info 55
+    L1.deleteInfo(55)
+
+    # print the list after deletion
+    print("\nAfter deletion 55")
 
 if __name__ == '__main__':
     main()
